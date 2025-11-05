@@ -52,6 +52,11 @@ public class PlayerScript : MonoBehaviour
             isGrounded = false;
         }
 
+        if (Input.GetKeyDown(KeyCode.Delete))
+        {
+            ResetHighScore();
+        }
+
         // skor naik berdasarkan waktu
         score += Time.deltaTime * 4;
         ScoreTxt.text = "SCORE : " + score.ToString("F");
@@ -97,5 +102,17 @@ public class PlayerScript : MonoBehaviour
             if (panelHighScore != null)
                 panelHighScore.text = "HIGHSCORE : " + highScore.ToString("F");
         }
+    }
+
+    public void ResetHighScore()
+    {
+        PlayerPrefs.SetFloat("HighScore", 0);
+        PlayerPrefs.Save();
+        highScore = 0;
+
+        if (HighScoreTxt != null)
+            HighScoreTxt.text = "HIGHSCORE : 0";
+
+        Debug.Log("High Score Reset");
     }
 }
