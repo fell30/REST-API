@@ -36,12 +36,8 @@ public class PlayerScript : MonoBehaviour
     {
         if (!isAlive)
         {
-            // saat kalah, tekan R untuk retry
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                Time.timeScale = 1f;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
+            // Logika 'R' untuk retry sudah dihapus
+            // karena kita gunakan tombol UI
             return;
         }
 
@@ -86,13 +82,20 @@ public class PlayerScript : MonoBehaviour
         rb.velocity = Vector2.zero;
 
         // cek dan simpan highscore
-        if (score > highScore)
-        {
-            highScore = score;
-            PlayerPrefs.SetFloat("HighScore", highScore);
-            PlayerPrefs.Save();
-        }
+        //if (score > highScore)
+        //{
+        //    highScore = score;
+        //    PlayerPrefs.SetFloat("HighScore", highScore);
+        //   PlayerPrefs.Save();
+        //}
 
+        // GANTI DENGAN INI
+        // 1. Ambil nama pemain yang sudah disimpan
+        string playerName = PlayerPrefs.GetString("PlayerName", "Player");
+
+        // 2. Masukkan ke LeaderboardManager
+        LeaderboardManager.AddEntry(playerName, score);
+        
         if (LosePanel != null)
         {
             LosePanel.SetActive(true);
@@ -114,5 +117,33 @@ public class PlayerScript : MonoBehaviour
             HighScoreTxt.text = "HIGHSCORE : 0";
 
         Debug.Log("High Score Reset");
+    }
+
+    // =======================================================
+    // --- FUNGSI BARU UNTUK TOMBOL DI LOSEPANEL ---
+    // =======================================================
+
+    /// <summary>
+    /// Fungsi ini akan dipanggil oleh tombol "Retry" di LosePanel.
+    /// </summary>
+    public void RetryGame()
+    {
+        // PENTING: Normalkan lagi Time Scale sebelum pindah scene
+        Time.timeScale = 1f; 
+        
+        // Reload scene yang aktif sekarang
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    /// <summary>
+    /// Fungsi ini akan dipanggil oleh tombol "Back to Menu" di LosePanel.
+    /// </summary>
+    public void BackToMenu()
+    {
+        // PENTING: Normalkan lagi Time Scale
+        Time.timeScale = 1f; 
+        
+        // Pindah ke scene Main Menu (pastikan namanya "MainMenuScene")
+        SceneManager.LoadScene("MainMenuScene"); 
     }
 }

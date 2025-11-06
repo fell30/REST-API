@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/BoatLoaderScene.unity
+    guid: d42597114a5892444a658612e1cd5f70
+  - enabled: 1
+    path: Assets/Scenes/NameInputScene.unity
+    guid: 901b34697ddb76f4cbb5420a6dee983b
+  - enabled: 1
+    path: Assets/Scenes/MainMenuScene.unity
+    guid: a2a91f69eecccb349b56af2fdfac98ed
+  - enabled: 1
+    path: Assets/Scenes/LeaderboardScene.unity
+    guid: 2ba354e821e371b4d897819bd2e6182e
+  - enabled: 1
+    path: Assets/Scenes/GameplayScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
